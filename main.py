@@ -182,50 +182,6 @@ __**Powered by ★·.·★ Ⓢⓐⓚⓢⓗⓐⓜ Ⓑⓗⓐⓘⓨⓐ ★·.·★*
     except Exception as e:
         await message.reply_text(f"⚠️ **Error:** `{str(e)}`")
 
-"""@bot.on_message(filters.command("getfree") & filters.private)
-async def getfree_command(_, message):
-    user_id = message.from_user.id
-    current_time = datetime.datetime.utcnow()
-    existing_admin = admins_col.find_one({"user_id": user_id, "expiry": {"$gt": current_time}})
-    
-    if existing_admin:
-        await message.reply_text("You already have premium access.")
-    else:
-        await message.reply_text(
-            "Click the button below to get 30 days of free premium access!",
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("Get Free Premium", callback_data="get_free_premium")]]
-            )
-        )
-
-@bot.on_callback_query()
-async def handle_callback_query(_, query):
-    if query.data == "get_free_premium":
-        user_id = query.from_user.id
-        current_time = datetime.datetime.utcnow()
-        expiry_time = current_time + datetime.timedelta(days=30)
-        
-        admins_col.update_one(
-            {"user_id": user_id},
-            {"$set": {"expiry": expiry_time}},
-            upsert=True
-        )
-        
-        await query.answer("Premium access granted!")
-        await query.edit_message_text("You have claimed your free premium access!")
-        
-        user = await bot.get_users(user_id)
-        await bot.send_message(
-            chat_id=user_id,
-            text=(
-                f"👋 **Hey {user.mention},**\n"
-                "You have been granted 30 days of free premium access.\n\n"
-                f"⏳ **Joining date:** `{current_time.strftime('%Y-%m-%d %H:%M:%S UTC')}`\n"
-                f"⌛ **Expiry date:** `{expiry_time.strftime('%Y-%m-%d %H:%M:%S UTC')}`"
-            ),
-            disable_web_page_preview=True
-        )"""
-
 @bot.on_message(filters.command("admins") & filters.user(OWNER))
 async def admins_command(_, message):
     requester = message.from_user.id  
@@ -253,7 +209,7 @@ def main_keyboard():
         [
             InlineKeyboardButton("🔙 𝐆𝐨 𝐁𝐚𝐜𝐤", callback_data="back"),
             InlineKeyboardButton("🏠 𝐌𝐚𝐢𝐧 𝐌𝐞𝐧𝐮", callback_data="home"),
-            InlineKeyboardButton("💠 𝐏𝐫𝐞𝐦𝐢𝐮�{m 𝐙𝐨𝐧𝐞 ✨", callback_data="premium_menu"),
+            InlineKeyboardButton("💠 𝐏𝐫𝐞𝐦𝐢𝐮𝐦 𝐙𝐨𝐧𝐞 ✨", callback_data="premium_menu"),
         ],
         
         [InlineKeyboardButton("📩 𝐍𝐞𝐞𝐝 𝐇𝐞𝐥𝐩? 𝐂𝐨𝐧𝐭𝐚𝐜𝐭 𝐒𝐮𝐩𝐩𝐨𝐫𝐭 💬", url="https://t.me/scammerbotaccess")],
@@ -309,43 +265,30 @@ async def start(bot: Client, m: Message):
     user_id = m.from_user.id
     chat_id = m.chat.id  
 
-    if await check_subscription(bot, user_id, chat_id):
-        await m.reply_photo(
-            photo=random_image_url,
-            caption=(
-                "╭━━━━━━━━━━━━━━━━━✦\n"
-                "┃ ✨ **BATCH EXTRACTOR BOT** ✨\n"
-                "┃ 🚀 *Unlock the Power of Instant Extraction!*\n"
-                "┃ 🔓 *No IDs, No Passwords – Just Pure Magic!*\n"
-                "╰━━━━━━━━━━━━━━━━━✦\n\n"
-                "📂 **Extract Original Links:**\n"
-                "╭➤ 🎬 **Videos**\n"
-                "├➤ 📚 **Notes**\n"
-                "╰➤ 📑 **PDFs & More!**\n\n"
-                "<blockquote><b>🔥 **Exclusive Features:** 🔥\n</blockquote></b>"
-                "╭➤ 🟢 **Physics Wallah** – Full Access, No Purchase!\n"
-                "├➤ 🔵 **Classplus** – Direct Video Links!\n"
-                "├➤ 🔴 **APPX V2 & V3** – Always Updated!\n"
-                "╰➤ 🟤 **KHAN SIR** – Unlocked Content!\n\n"
-                "⚡ **No Encryption – Just Click & Access!**\n\n"
-                "💬 **Need Help? Have Questions?**\n"
-                "📩 **DM for Instant Support:** [Click Here](https://t.me/botsupdatesbynaruto)\n\n"
-                "📌 **Press /extract to See Available Apps & Start Extracting!** 👇"
-            ),
-            quote=True,
-        )
-    else:
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("🔥 Join Our Channel 🔥", url=f"https://t.me/{FORCE_SUB_CHANNEL}")]
-        ])
-        await m.reply_text(
-            "╭🚫 **ACCESS DENIED!** 🚫\n"
-            "┃ 👉 *You need to join our channel to unlock this bot!*\n"
-            "┃ 🔹 **Exclusive Features Await You!**\n"
-            "╰📢 **Click Below & Become Part of the Community!** 🔥\n\n"
-            "📌 **Press /helper after joining to explore all features!** 👇",
-            reply_markup=keyboard
-        )
+    await m.reply_photo(
+        photo=random_image_url,
+        caption=(
+            "╭━━━━━━━━━━━━━━━━━✦\n"
+            "┃ ✨ **BATCH EXTRACTOR BOT** ✨\n"
+            "┃ 🚀 *Unlock the Power of Instant Extraction!*\n"
+            "┃ 🔓 *No IDs, No Passwords – Just Pure Magic!*\n"
+            "╰━━━━━━━━━━━━━━━━━✦\n\n"
+            "📂 **Extract Original Links:**\n"
+            "╭➤ 🎬 **Videos**\n"
+            "├➤ 📚 **Notes**\n"
+            "╰➤ 📑 **PDFs & More!**\n\n"
+            "<blockquote><b>🔥 **Exclusive Features:** 🔥\n</blockquote></b>"
+            "╭➤ 🟢 **Physics Wallah** – Full Access, No Purchase!\n"
+            "├➤ 🔵 **Classplus** – Direct Video Links!\n"
+            "├➤ 🔴 **APPX V2 & V3** – Always Updated!\n"
+            "╰➤ 🟤 **KHAN SIR** – Unlocked Content!\n\n"
+            "⚡ **No Encryption – Just Click & Access!**\n\n"
+            "💬 **Need Help? Have Questions?**\n"
+            "📩 **DM for Instant Support:** [Click Here](https://t.me/botsupdatesbynaruto)\n\n"
+            "📌 **Press /extract to See Available Apps & Start Extracting!** 👇"
+        ),
+        quote=True,
+    )
 
 @bot.on_message(filters.command(["extract"]))
 async def helper(bot: Client, m: Message):
@@ -353,37 +296,25 @@ async def helper(bot: Client, m: Message):
     user_id = m.from_user.id
     chat_id = m.chat.id  
 
-    if await check_subscription(bot, user_id, chat_id):
-        await m.reply_photo(
-            photo=random_image_url,
-            caption=(
-                "📌 **Select a Service to Begin:**\n\n"
-                "╭─── 📂 **Available Services:**\n"
-                "├➤ 📚 **Physics Wallah** – Access notes, videos, PDFs\n"
-                "├➤ 🎬 **Classplus** – Unlock premium videos\n"
-                "├➤ 📲 **AppX V2, V3** – Latest updates & resources\n"
-                "├➤ 🎓 **Khan Sir** – Study materials & more\n"
-                "╰➤ 🔗 **Other Resources** – Extra content\n\n"
-                "🎯 **How to Use?**\n"
-                "🔹 *Simply tap on a button below to get started!*\n\n"
-                "📢 **Need Assistance?**\n"
-                "💬 **DM Support:** [Click Here](https://t.me/botsupdatesbynaruto)\n\n"
-                "👇 **Choose an option below & start extracting!**"
-            ),
-            quote=True,
-            reply_markup=main_keyboard()
-        )
-    else:
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("🔥 Join Our Channel 🔥", url=f"https://t.me/{FORCE_SUB_CHANNEL}")]
-        ])
-        await m.reply_text(
-            "🚨 **Access Restricted!** 🚨\n\n"
-            "🔒 *This bot is available only for our channel members!*\n"
-            "📢 **Join now and unlock premium features instantly!**\n\n"
-            "🎁 **Click the button below to subscribe!** ⬇️",
-            reply_markup=keyboard
-        )
+    await m.reply_photo(
+        photo=random_image_url,
+        caption=(
+            "📌 **Select a Service to Begin:**\n\n"
+            "╭─── 📂 **Available Services:**\n"
+            "├➤ 📚 **Physics Wallah** – Access notes, videos, PDFs\n"
+            "├➤ 🎬 **Classplus** – Unlock premium videos\n"
+            "├➤ 📲 **AppX V2, V3** – Latest updates & resources\n"
+            "├➤ 🎓 **Khan Sir** – Study materials & more\n"
+            "╰➤ 🔗 **Other Resources** – Extra content\n\n"
+            "🎯 **How to Use?**\n"
+            "🔹 *Simply tap on a button below to get started!*\n\n"
+            "📢 **Need Assistance?**\n"
+            "💬 **DM Support:** [Click Here](https://t.me/botsupdatesbynaruto)\n\n"
+            "👇 **Choose an option below & start extracting!**"
+        ),
+        quote=True,
+        reply_markup=main_keyboard()
+    )
 
 @bot.on_callback_query()
 async def callback_handler(bot: Client, query: CallbackQuery):
@@ -455,18 +386,7 @@ async def callback_handler(bot: Client, query: CallbackQuery):
         user_id = query.from_user.id
         chat_id = query.message.chat.id
 
-        if await check_subscription(bot, user_id, chat_id):
-            await khan(bot, query.message)  
-        else:
-            keyboard = InlineKeyboardMarkup([
-                [InlineKeyboardButton("Join Channel", url=f"https://t.me/{FORCE_SUB_CHANNEL}")]
-            ])
-            await query.message.reply_text(
-                "🚫 **Oops! It seems you're not subscribed to our channel.** 😢\n"
-                "✅ **Join us to unlock amazing features and updates!** 🌟\n"
-                "👉 **Click the button below to subscribe and continue!** ⬇️",
-                reply_markup=keyboard
-            )
+        await khan(bot, query.message)  
     elif query.data.endswith("PWWP"):
         await pwwp_callback(bot, query)
 
@@ -526,20 +446,6 @@ async def back_callback(client, callback_query):
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-async def check_subscription(bot, user_id, chat_id):
-    try:
-        user_status = await bot.get_chat_member(FORCE_SUB_CHANNEL, user_id)
-        status_str = str(user_status.status)  
-        logger.info(f"User {user_id} Status: {status_str}")
-
-        if status_str in ["ChatMemberStatus.MEMBER", "ChatMemberStatus.ADMINISTRATOR", "ChatMemberStatus.OWNER"]:
-            return True  
-
-    except Exception as e:
-        logger.error(f"Error checking subscription: {e}")
-
-    return False  
-
 pw_login_keyboard = InlineKeyboardMarkup([
     [
         InlineKeyboardButton("📱 Mobile No.", callback_data="mobile"),
@@ -563,37 +469,15 @@ async def appx_v1_button_pressed(bot: Client, m: CallbackQuery):
     user_id = m.from_user.id
     chat_id = m.message.chat.id
 
-    if await check_subscription(bot, user_id, chat_id):
-        await m.answer()
-        await api_v1(bot, m.message)
-    else:
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("Join Channel", url=f"https://t.me/{FORCE_SUB_CHANNEL}")]
-        ])
-        await m.reply_text(
-                "🚫 **Oops! It seems you're not subscribed to our channel.** 😢\n"
-                "✅ **Join us to unlock amazing features and updates!** 🌟\n"
-                "👉 **Click the button below to subscribe and continue!** ⬇️",
-                reply_markup=keyboard
-            )
+    await m.answer()
+    await api_v1(bot, m.message)
 
 async def appx_v3_button_pressed(bot: Client, m: CallbackQuery):
     user_id = m.from_user.id
     chat_id = m.message.chat.id
 
-    if await check_subscription(bot, user_id, chat_id):
-        await m.answer()
-        await appex_v3_txt(bot, m.message)
-    else:
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("Join Channel", url=f"https://t.me/{FORCE_SUB_CHANNEL}")]
-        ])
-        await m.reply_text(
-                "🚫 **Oops! It seems you're not subscribed to our channel.** 😢\n"
-                "✅ **Join us to unlock amazing features and updates!** 🌟\n"
-                "👉 **Click the button below to subscribe and continue!** ⬇️",
-                reply_markup=keyboard
-            )
+    await m.answer()
+    await appex_v3_txt(bot, m.message)
 
 @bot.on_message(filters.command("stop"))
 async def stop_all_processes(client, message):
