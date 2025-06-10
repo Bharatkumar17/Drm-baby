@@ -19,6 +19,7 @@ from classplus import *
 from pyrogram.errors import UserNotParticipant
 
 
+FORCE_SUB_CHANNEL = FORCE_CHANNEL
 ALL_USERS = set()
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
