@@ -7,20 +7,20 @@
         "pyrogram"
     ],
     "repository": "https://github.com/hackercoder24/sellingrepotest",
-    "success_url": "https://telegram.me/scammer_botxz",
+    "success_url": "https://t.me/rajsthangkguru1",
     "stack": "container",
     "env": {
         "API_ID": {
             "description": "Enter your API id You can generate by https://my.telegram.org/auth",
-            "value" : "29177634"
+            "value" : "26729193"
         },
         "API_HASH": {
             "description": "Enter your API Hash You can generate by https://my.telegram.org/auth",
-            "value" : "5eb1b467a4587b19a717626386469f94"
+            "value" : "a94598ef642481e35466292df95f251e"
         },
         "BOT_TOKEN": {
             "description": "Enter your bot token You can generate by @BotFather",
-            "value" : "7644668124:AAE3JLKyiKbWolr33InO5-QKk6lphqnu1UI"
+            "value" : "7106345054:AAFtEAF5QVxGdEwN0sIBSbBYmUCu6MELH-g"
         }
     },
     "addons": []
