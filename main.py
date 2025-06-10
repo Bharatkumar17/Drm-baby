@@ -18,7 +18,6 @@ from khan import *
 from classplus import *
 from pyrogram.errors import UserNotParticipant
 
-FORCE_SUB_CHANNEL = FORCE_CHANNEL
 
 ALL_USERS = set()
 
