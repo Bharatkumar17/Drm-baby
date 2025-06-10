@@ -18,8 +18,8 @@ from khan import *
 from classplus import *
 from pyrogram.errors import UserNotParticipant
 
+#FORCE_SUB_CHANNEL = FORCE_CHANNEL
 
-FORCE_SUB_CHANNEL = FORCE_CHANNEL
 ALL_USERS = set()
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -334,18 +334,7 @@ async def start(bot: Client, m: Message):
             ),
             quote=True,
         )
-    else:
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("🔥 Join Our Channel 🔥", url=f"https://t.me/{FORCE_SUB_CHANNEL}")]
-        ])
-        await m.reply_text(
-            "╭🚫 **ACCESS DENIED!** 🚫\n"
-            "┃ 👉 *You need to join our channel to unlock this bot!*\n"
-            "┃ 🔹 **Exclusive Features Await You!**\n"
-            "╰📢 **Click Below & Become Part of the Community!** 🔥\n\n"
-            "📌 **Press /helper after joining to explore all features!** 👇",
-            reply_markup=keyboard
-        )
+
 
 @bot.on_message(filters.command(["extract"]))
 async def helper(bot: Client, m: Message):
